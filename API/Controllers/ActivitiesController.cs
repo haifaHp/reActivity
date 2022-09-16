@@ -28,12 +28,12 @@ namespace API.Controllers
 
             return await _context.Activities.FindAsync(id);
         }
-         [HttpGet("{id}")] //activities/id
-        public async Task<ActionResult<Activity>> GetActivitypro(Guid id)
-        {
+        //  [HttpGet("{id}")] //activities/id
+        // public async Task<ActionResult<Activity>> GetActivitypro(Guid id)
+        // {
 
-            return await _context.Activities.FindAsync(id);
-        }
+        //     return await _context.Activities.FindAsync(id);
+        // }
 
     }
 }
