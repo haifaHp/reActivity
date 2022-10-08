@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 
 
 
 import axios from 'axios';
-import { List } from 'semantic-ui-react';
+import { Container, List } from 'semantic-ui-react';
 import { Activity } from '../models/activity';
 import NavBar from './NavBar';
+import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 
 function App() {
 
@@ -23,24 +24,19 @@ function App() {
 
 
   return (
-    <div >
+    < >
    <NavBar/>
-     
+     <Container style={{marginTop:'7em'}}>
+
+     <ActivityDashboard activities={activities}/>
+     </Container>
    
-     <List/>
+   
       
-        <List>
-          {activities.map(activity => (
-
-            <li key={activity.id}>
-              {activity.title}
-
-            </li>
-          ))}
-        </List>
+        
        
      
-    </div>
+    </>
   );
 }
 
