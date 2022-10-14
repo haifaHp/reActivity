@@ -1,18 +1,44 @@
 import axios ,{AxiosResponse} from "axios";
+import { resolve } from "path";
+import { Activity } from "../models/activity";
+
+const sleep =(delay: number)=>{
+    return new Promise((resolve)=>{
+setTimeout(resolve,delay)
+
+    })
+}
+
+
 
 axios.defaults.baseURL='http://localhost:5000/api';
+axios.interceptors.response.use(async Response=>{
+    try {
+        await sleep(1000);
+        return Response;
+    } catch (error) {
+        console.log(error);
+        return await Promise.reject(error);
+    }
+})
 
-const responseBody=(Response:AxiosResponse)=> Response.data;
 
-const request={
+const responseBody= <T> (Response:AxiosResponse<T>)=> Response.data;
 
-    get :(url: string)=> axios .get(url).then(responseBody),
-    post :(url: string,body:{})=> axios .post(url,body).then(responseBody),
-    put :(url: string,body:{})=> axios .put(url,body).then(responseBody),
-    del :(url: string)=> axios .delete(url).then(responseBody),
+const requests={
+
+    get :<T>(url: string)=> axios .get<T>(url).then(responseBody),
+    post  : <T>(url: string,body:{})=> axios .post<T>(url,body).then(responseBody),
+    put :<T>(url: string,body:{})=> axios .put<T>(url,body).then(responseBody),
+    del :<T>(url: string)=> axios .delete<T>(url).then(responseBody),
 }
 const Activities={
-    list:() => request.get('/activities')
+    list:() =>requests.get<Activity[]>('/activities'),
+    detail:(id:string)=>requests.get<Activity>(`/activities/${id}`),
+    create:(activity:Activity)=>requests.post<void>('/activities',activity),//00000000
+    update:(activity:Activity)=>requests.put<void>(`/activities/${activity.id}`,activity),
+    delete:(id:string)=>requests.del<void>(`/activities/${id}`)
+
 }
 
 const agent={
