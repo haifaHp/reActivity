@@ -5,6 +5,7 @@ import App from './app/layout/App';
 import 'semantic-ui-css/semantic.min.css';
 
 import reportWebVitals from './reportWebVitals';
+import { store, StoreContext } from './app/stores/store';
 
 
 
@@ -23,8 +24,9 @@ document.head.appendChild(styleLink);
 
 root.render(
 
-
+<StoreContext.Provider value={store}>
     <App />
+    </StoreContext.Provider>
 
 );
 
