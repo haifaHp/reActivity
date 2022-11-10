@@ -1,5 +1,6 @@
  import { observer } from 'mobx-react-lite';
 import { SyntheticEvent, useState } from'react';
+import { Link } from 'react-router-dom';
 import { Button, Item, Label, Segment } from 'semantic-ui-react';
 import { useStore } from '../../../app/stores/store';
 
@@ -30,7 +31,7 @@ import { useStore } from '../../../app/stores/store';
             <div>{activity.city} , {activity.venue}</div>
         </Item.Description>
         <Item.Extra>
-            <Button onClick={()=> activityStore.selectActivity  (activity.id)}  floated='right' content='view' color='blue' />
+            <Button as={Link} to={`/activities/${activity.id}`}  floated='right' content='view' color='blue' />
             <Button
             name={activity.id}
             loading={loading && target===activity.id} 
