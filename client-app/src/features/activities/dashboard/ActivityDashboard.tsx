@@ -5,6 +5,8 @@ import LoadingComponent from '../../../app/layout/LaodingComponent';
 import { useStore } from '../../../app/stores/store';
 import ActivityDetails from '../details/ActivityDetails';
 import ActivityForm from '../form/ActivityForm';
+import ActivityFilters from './ActivityFilters';
+
 import ActivityList from './ActivityList';
 
 
@@ -31,7 +33,7 @@ export default observer( function ActivityDashboard(){
 />
 </Grid.Column>
 <Grid.Column width='6'>
-    <h2>Activity filter</h2>
+   <ActivityFilters/>
 </Grid.Column>
 </Grid>
     )
